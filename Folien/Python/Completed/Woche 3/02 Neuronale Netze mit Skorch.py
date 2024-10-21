@@ -372,13 +372,13 @@ mlp_clf_oop = NeuralNetClassifier(
 )
 
 # %%
-mlp_clf_oop.fit(x_train, y_train)
+# mlp_clf_oop.fit(x_train, y_train)
 
 # %%
-y_pred_mlp_oop = mlp_clf_oop.predict(x_test)
+# y_pred_mlp_oop = mlp_clf_oop.predict(x_test)
 
 # %%
-print_scores(y_test, y_pred_mlp_oop)
+# print_scores(y_test, y_pred_mlp_oop)
 
 # %% [markdown]
 #
@@ -412,13 +412,13 @@ conv_clf = NeuralNetClassifier(
 )
 
 # %%
-conv_clf.fit(x_train, y_train)
+# conv_clf.fit(x_train, y_train)
 
 # %%
-y_pred_conv = conv_clf.predict(x_test)
+# y_pred_conv = conv_clf.predict(x_test)
 
 # %%
-print_scores(y_test, y_pred_conv)
+# print_scores(y_test, y_pred_conv)
 
 # %%
 conv_model = nn.Sequential(
@@ -469,12 +469,12 @@ conv_clf = NeuralNetClassifier(
 )
 
 # %%
-conv_clf.fit(x_train, y_train)
+# conv_clf.fit(x_train, y_train)
 
 # %%
-y_pred_conv = conv_clf.predict(x_test)
+# y_pred_conv = conv_clf.predict(x_test)
 
 # %%
-print_scores(y_test, y_pred_conv)
+# print_scores(y_test, y_pred_conv)
 
 # %%
