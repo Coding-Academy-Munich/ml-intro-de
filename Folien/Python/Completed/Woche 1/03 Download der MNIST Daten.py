@@ -1,4 +1,3 @@
-# %%
 # %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
