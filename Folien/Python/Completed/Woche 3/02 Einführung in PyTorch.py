@@ -623,7 +623,7 @@ print_results()
 
 # %% [markdown]
 #
-# Let's train the network for 80 epochs and check the results.
+# Let's train the network for 400 epochs and check the results.
 
 # %%
 torch.random.manual_seed(42)
@@ -635,16 +635,17 @@ print_results()
 # %% [markdown]
 #
 # The mean error has decreased significantly after training the network for 400
-# epochs. The network has learned to predict the mean of the input data,
-# slightly better than tha untrained net.
+# epochs. The network has learned to predict the mean of the input data much
+# better than tha untrained net.
 #
 # We see that the loss during each training epoch decreased noticably. This is a
 # good sign that the network is learning.
 #
 # However, if you try to train the network for many more epochs with the
 # training rate of 0.15, you will notice that it does not become better, and
-# even starts to get worse. This is because the learning rate is too high, and
-# the network starts to overshoot the minimum of the loss function.
+# even starts to get worse. This is because the learning rate, while initially
+# successful in improving the net, is becoming too high, and the network starts
+# to overshoot the minimum of the loss function.
 
 # %%
 run_training_loop(simple_net, num_epochs=1000, learning_rate=0.15)
