@@ -13086,7 +13086,7 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=f90ec10a9da4f505"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=dc70f152e72d5571"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img alt="Python Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRw
@@ -13136,19 +13136,12 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 " style="display:block;margin:auto;width:10%"/>
 <br/></p>
 <div style="text-align:center; font-size:200%;">
-<b>NumPy Basics</b>
+<b>Mehr NumPy Basics</b>
 </div>
 <br>
 <div style="text-align:center;">Dr. Matthias Hölzl</div>
 <br/>
 </br></div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered celltag_slide" id="cell-id=aa841fd10b920fdb"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Grundkonzepte-von-NumPy">Grundkonzepte von NumPy<a class="anchor-link" href="#Grundkonzepte-von-NumPy">¶</a></h1>
-</div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered" id="cell-id=9189f60d213fe786">
@@ -13162,24 +13155,23 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d65f3562f4b8f041">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0dfa3b797880b8ab">
 <div class="input">
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1cd1a1a4ea512d93">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b01467915551f862">
 <div class="input">
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">vector</span>
 </pre></div>
 </div>
 </div>
@@ -13189,18 +13181,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[3]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([3, 2, 4])</pre>
+<pre>array([1, 2, 3, 4])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bc6eec37c8fa569b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8b94d28c3140e1ef">
 <div class="input">
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">vector</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -13210,18 +13202,29 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[4]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>numpy.ndarray</pre>
+<pre>(4,)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=c9368110fae18c7f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6b65ea42c2d2c029">
 <div class="input">
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=03541b34bc0b2955">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span>
 </pre></div>
 </div>
 </div>
@@ -13229,31 +13232,22 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>dtype('int64')</pre>
+<pre>array([[ 1,  2,  3,  4],
+       [ 5,  6,  7,  8],
+       [ 9, 10, 11, 12]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=54d1cd85121e743b">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1c4b88685936ce00">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2e5029bc46bbf3d5">
 <div class="input">
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v3</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -13263,18 +13257,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>dtype('float64')</pre>
+<pre>(3, 4)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2251def6a3a89789">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=dd4fdaa3929ac399">
 <div class="input">
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -13284,46 +13278,60 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([11, 11, 11])</pre>
+<pre>np.int64(78)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=4b63306f4cc52d5a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bf245dc22ca1759d">
 <div class="input">
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">lst1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="n">lst2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([15, 18, 21, 24])</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3a87b0d4e3a89f68">
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f4c1b9fbb5a6dc42">
 <div class="input">
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vector_sum</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)):</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">v1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">v2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">result</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([1, 2, 3, 4])</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ea3d90cc9be0fa4f">
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4c06f178cae7bd19">
 <div class="input">
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">vector_sum</span><span class="p">(</span><span class="n">lst1</span><span class="p">,</span> <span class="n">lst2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -13333,19 +13341,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[11]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[11, 11, 11]</pre>
+<pre>array([5, 6, 7, 8])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=82fc791679e5f373">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8ad1811ca7fde67f">
 <div class="input">
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>it
-<span class="n">vector_sum</span><span class="p">(</span><span class="n">lst1</span><span class="p">,</span> <span class="n">lst2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13353,22 +13360,20 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>552 ns ± 9.77 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
-</pre>
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([10, 26, 42])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=96ed4a313bbb8723">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ce1fe096d0a3937c">
 <div class="input">
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>it
-<span class="n">v1</span> <span class="o">=</span> <span class="n">v2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span>
 </pre></div>
 </div>
 </div>
@@ -13376,21 +13381,22 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>20.2 ns ± 0.0428 ns per loop (mean ± std. dev. of 7 runs, 10,000,000 loops each)
-</pre>
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 1,  2,  3,  4],
+       [ 5,  6,  7,  8],
+       [ 9, 10, 11, 12]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e56f717799e62d1a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1924a46914ce58f1">
 <div class="input">
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">*</span> <span class="n">v2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -13400,18 +13406,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[14]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([24, 18, 28])</pre>
+<pre>np.float64(6.5)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=69f2229a84251d80">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=87865e98c208ccde">
 <div class="input">
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13421,18 +13427,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[15]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>70</pre>
+<pre>array([ 2.5,  6.5, 10.5])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ac0f8c0ed330514c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0881eb29de669e03">
 <div class="input">
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13442,39 +13448,29 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>9</pre>
+<pre>array([5., 6., 7., 8.])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3b17fcded8fa1f3a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=62af76b2169e5d5a">
 <div class="input">
 <div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>3.0</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e246e480d846464b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5b7cef599ba10f92">
 <div class="input">
 <div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tensor</span>
 </pre></div>
 </div>
 </div>
@@ -13484,18 +13480,22 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[18]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>0.816496580927726</pre>
+<pre>array([[[1, 2],
+        [3, 4]],
+
+       [[5, 6],
+        [7, 8]]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=5dcb64ff2a187aa3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2e04c132b66bf8b5">
 <div class="input">
 <div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -13505,18 +13505,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[19]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
+<pre>(2, 2, 2)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=f74231cea0102c72">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=682469f5b9c7bea0">
 <div class="input">
 <div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -13526,18 +13526,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[20]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>2</pre>
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=439cd1a02687c1c8">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b501f3dbbe363cc9">
 <div class="input">
 <div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -13547,39 +13547,29 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[21]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([3, 2, 4])</pre>
+<pre>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=010bb9a4343456b5">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cd237f773e1598cb">
 <div class="input">
 <div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># range(1.0, 10.0)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>2</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=699eb5aa7f0c83b9">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=479292695389f356">
 <div class="input">
 <div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13589,29 +13579,39 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>1</pre>
+<pre>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=dd6d11a3f27bdf7e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=69881bc4be2a5e61">
 <div class="input">
 <div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[24]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=de0e4f7bc4e7ea91">
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ee68eed9aef93956">
 <div class="input">
 <div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
 </div>
@@ -13621,30 +13621,39 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[25]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1, 2, 3],
-       [4, 5, 6]])</pre>
+<pre>dtype('int64')</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=7d1fe7b9e895a96c">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=841658ed5b974edb">
 <div class="input">
 <div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[26]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>dtype('float64')</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=101ca9a146f1f72b">
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9194816b52193939">
 <div class="input">
 <div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13654,20 +13663,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[27]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1, 0],
-       [0, 1],
-       [2, 3]])</pre>
+<pre>array([2, 3, 4, 5, 6, 7, 8, 9])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=3679d71a8132e2ca">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=902b6bf85248354c">
 <div class="input">
 <div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span> <span class="o">+</span> <span class="n">m1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13677,19 +13684,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[28]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 2,  4,  6],
-       [ 8, 10, 12]])</pre>
+<pre>array([2, 5, 8])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2fa74f7f091a52f3">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=20426374e7b89475">
 <div class="input">
 <div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m2</span> <span class="o">+</span> <span class="n">m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13699,31 +13705,39 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[29]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[2, 0],
-       [0, 2],
-       [4, 6]])</pre>
+<pre>array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=8169fa93248b0e1b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fcda9e57b1a4a14c">
 <div class="input">
 <div class="prompt input_prompt">In [30]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># m1 + m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[30]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ])</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=02f33d5fd727b42c">
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2714258df919887c">
 <div class="input">
 <div class="prompt input_prompt">In [31]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13733,18 +13747,19 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[31]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(3,)</pre>
+<pre>array([0.        , 0.11111111, 0.22222222, 0.33333333, 0.44444444,
+       0.55555556, 0.66666667, 0.77777778, 0.88888889, 1.        ])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d5169d8cca4afd65">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d8653e911afe8b12">
 <div class="input">
 <div class="prompt input_prompt">In [32]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13754,18 +13769,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[32]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(2, 3)</pre>
+<pre>array([0., 0., 0.])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=873e834d8aede14b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=93b3e0f9a3cd3e8d">
 <div class="input">
 <div class="prompt input_prompt">In [33]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m2</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -13775,18 +13790,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[33]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(3, 2)</pre>
+<pre>(3,)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d715584ebf6d040f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b731ec9cf5c084de">
 <div class="input">
 <div class="prompt input_prompt">In [34]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,))</span>
 </pre></div>
 </div>
 </div>
@@ -13796,19 +13811,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[34]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1, 2, 3],
-       [4, 5, 6]])</pre>
+<pre>array([0., 0., 0.])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=de92341950589845">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8af81b5387aa91a2">
 <div class="input">
 <div class="prompt input_prompt">In [35]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -13818,20 +13832,20 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[35]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1, 4],
-       [2, 5],
-       [3, 6]])</pre>
+<pre>array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f7b5f77a2cb8f9f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b09cdb8069a6b07f">
 <div class="input">
 <div class="prompt input_prompt">In [36]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -13841,20 +13855,24 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[36]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1, 0],
-       [0, 1],
-       [2, 3]])</pre>
+<pre>array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=e01986c082e1c130">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=62046def5a16614b">
 <div class="input">
 <div class="prompt input_prompt">In [37]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m2</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13864,19 +13882,18 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[37]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1, 0, 2],
-       [0, 1, 3]])</pre>
+<pre>array([1., 1., 1.])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=def0b33dce3e1f1a">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f6776640d7ea6828">
 <div class="input">
 <div class="prompt input_prompt">In [38]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -13886,53 +13903,41 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[38]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[2, 4],
-       [2, 6],
-       [5, 9]])</pre>
+<pre>array([[[1., 1., 1.],
+        [1., 1., 1.]]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=2e4434b6ff330d7b">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=46681a201526513b">
 <div class="input">
 <div class="prompt input_prompt">In [39]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span> <span class="o">+</span> <span class="n">m2</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># np.ones(1, 2, 3)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[39]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[2, 2, 5],
-       [4, 6, 9]])</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ef858a479b1c729f">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=88d7302504e9da7f">
 <div class="input">
 <div class="prompt input_prompt">In [40]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># m1 * m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=ecb0c2d920935f30">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bd128b1cd778acd0">
 <div class="input">
 <div class="prompt input_prompt">In [41]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">id</span>
 </pre></div>
 </div>
 </div>
@@ -13942,20 +13947,21 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[41]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 1,  0],
-       [ 0,  5],
-       [ 6, 18]])</pre>
+<pre>array([[1., 0., 0., 0.],
+       [0., 1., 0., 0.],
+       [0., 0., 1., 0.],
+       [0., 0., 0., 1.]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=fe97a3aa05598684">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e3eb0ae6ea8cd1db">
 <div class="input">
 <div class="prompt input_prompt">In [42]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13965,19 +13971,20 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[42]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 7, 11],
-       [16, 23]])</pre>
+<pre>array([[1., 0., 0., 0.],
+       [0., 1., 0., 0.],
+       [0., 0., 1., 0.]])</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=1ebb74741e879b3e">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=39e25a788c836868">
 <div class="input">
 <div class="prompt input_prompt">In [43]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">m1</span> <span class="o">@</span> <span class="n">m2</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -13987,41 +13994,10 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 <div class="output_area">
 <div class="prompt output_prompt">Out[43]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[ 7, 11],
-       [16, 23]])</pre>
+<pre>array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]])</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=bee8da31d7abeee6">
-<div class="input">
-<div class="prompt input_prompt">In [44]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">@</span> <span class="n">v2</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[44]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>70</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=6b4e03423667dbb7">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 </div>
 </div>
 </div>

@@ -190,7 +190,7 @@ def train_and_evaluate(
     )
 
     model_checkpoint = ModelCheckpoint(
-        'best_model.keras',
+        'localdata/best_model.keras',
         monitor='val_accuracy',
         save_best_only=True,
         mode='max'
@@ -210,7 +210,7 @@ def train_and_evaluate(
     )
 
     # Load best model
-    model = keras.models.load_model('best_model.keras')
+    model = keras.models.load_model('localdata/best_model.keras')
 
     # Evaluate model
     results = model.evaluate(
