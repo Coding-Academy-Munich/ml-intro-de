@@ -602,7 +602,11 @@ def run_training_loop(model, num_epochs=100, num_samples=5000, learning_rate=1e-
 def print_results():
     X, y = generate_data(500)
     predicted = simple_net(X).detach()
-    error = np.abs(predicted - y)
+
+    y_np = y.cpu().numpy()
+    predicted_np = predicted.cpu().numpy()
+
+    error = np.abs(predicted_np - y_np)
     values = (
         np.concatenate(
             [
@@ -629,6 +633,7 @@ print_results()
 torch.random.manual_seed(42)
 simple_net = SimpleNet()
 
+# %%
 run_training_loop(simple_net, num_epochs=400, learning_rate=0.15)
 print_results()
 
@@ -669,6 +674,8 @@ print_results()
 torch.random.manual_seed(42)
 simple_net = SimpleNet()
 
+
+# %%
 run_training_loop(simple_net, num_epochs=400, learning_rate=0.15)
 print_results()
 
@@ -788,6 +795,8 @@ torch.relu(x)
 relu_module = nn.ReLU()
 x = torch.linspace(-5, 5, steps=100)
 y = relu_module(x)
+
+# %%
 plt.plot(x.numpy(), y.numpy())
 plt.title("ReLU Activation Function")
 plt.xlabel("Input")
@@ -846,6 +855,9 @@ plt.show()
 # %%
 # Example of a Conv2d layer
 conv_layer = nn.Conv2d(in_channels=1, out_channels=1, kernel_size=3)
+conv_layer
+
+# %%
 input_image = torch.randn(1, 1, 5, 5)  # Batch size, channels, height, width
 output_image = conv_layer(input_image)
 print("Input shape:", input_image.shape)
@@ -861,7 +873,6 @@ print("Output shape:", output_image.shape)
 # - Modules will be added in the order they are passed.
 
 # %%
-# Example of using nn.Sequential
 sequential_model = nn.Sequential(
     nn.Flatten(), nn.Linear(28 * 28, 128), nn.ReLU(), nn.Linear(128, 10)
 )
@@ -1060,3 +1071,5 @@ x, y
 
 # %%
 # y.backward()  # This will raise an error
+
+# %%
