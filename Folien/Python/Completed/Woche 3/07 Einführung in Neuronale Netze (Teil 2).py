@@ -29,6 +29,9 @@ seq_model = nn.Sequential(
 )
 
 # %%
+seq_model
+
+# %%
 seq_model(torch.tensor([1.0, 2.0]))
 
 
@@ -70,40 +73,33 @@ plot_neuron_2d(SimpleNet())
 
 # %% [markdown]
 #
-# ## Training Neuraler Netze
-#
 # <img src="img/Figure-18-034.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# ## Training Neuraler Netze
 #
-# <img src="img/Figure-18-035.png" style="width: 100%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-18-035.png" style="width: 100%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# ## Training Neuraler Netze
 #
 # <img src="img/Figure-18-036.png" style="width: 50%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# ## Training Neuraler Netze
 #
-# <img src="img/Figure-18-037.png" style="width: 100%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-18-037.png" style="width: 100%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
 # ## Wie updaten wir die Parameter?
 #
-# <img src="img/Figure-05-012.png" style="width: 35%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-05-012.png" style="width: 35%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# ## Wie updaten wir die Parameter?
 #
-# <img src="img/Figure-05-013.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-05-013.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# ## Wie updaten wir die Parameter?
 #
-# <img src="img/Figure-05-001.png" style="float: left; width: 45%; margin-left: auto; margin-right: auto; 0"/>
-# <img src="img/Figure-05-005.png" style="float: right; width: 45%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-05-001.png" style="float: left; width: 45%; margin-left: auto; margin-right: auto;"/>
+# <img src="img/Figure-05-005.png" style="float: right; width: 45%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
 # # MNIST
