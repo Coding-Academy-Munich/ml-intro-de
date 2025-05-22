@@ -10,88 +10,138 @@
 # %%
 import torch
 import torch.nn as nn
-import matplotlib.pyplot as plt
-from skorch import NeuralNetClassifier
-from skorch.callbacks import EpochScoring
+
 
 # %% [markdown]
-# ## Bessere Netzwerkarchitektur
+# ## Modelle
 #
-# <img src="img/Figure-21-008.png" style="width: 30%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-11-001.png" style="width: 100%;"/>
 
 # %% [markdown]
-# <img src="img/Figure-21-009.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# <img src="img/Figure-21-043.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# ## Beispiel: Conv Net
-
-# %%
-def create_conv_model():
-    model = nn.Sequential(
-        nn.Conv2d(1, 32, 3, 1),
-        nn.ReLU(),
-        nn.Conv2d(32, 64, 3, 1),
-        nn.MaxPool2d(2),
-        nn.Dropout2d(0.25),
-        nn.Flatten(1),
-        nn.Linear(9216, 128),
-        nn.ReLU(),
-        nn.Dropout2d(0.5),
-        nn.Linear(128, 10)
-    )
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-    return model, optimizer
-
-# %% [markdown]
-# ## Data Engine (Tesla)
+# ## Für Neuronale Netze:
 #
-# <img src="img/data-engine.jpeg" style="width: 100%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# ## Probleme: Abhängigkeiten
+# Was repräsentiert werden kann hängt ab von
 #
-# Relevante Informationen sind nicht immer nahe in den Daten:
+# - Anzahl der Layers
+# - Anzahl der Neutronen per Layer
+# - Komplexität der Verbindungen zwischen Neutronen
+
+# %% [markdown]
+# ### Was kann man (theoretisch) lernen?
 #
-# "Er hatte mit dem Mann, der ihm den Schlüssel, der zum Schloss, das ihn von großem Reichtum trennte, gehörte, gab, noch nicht gesprochen.
+# Schwierig aber irrelevant
 
 # %% [markdown]
-# # Memory / State
-# <img src="img/Figure-22-012.png" style="width: 20%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# Funktioniert gut aber mit gewissen Schwächen.
+# ### Was kann man praktisch lernen?
 #
-# Man muss wissen, welche Information für das aktuell betrachtete Element relevant ist:
+# Sehr viel, wenn man genug Zeit und Daten hat
 
 # %% [markdown]
-# - The cat didn't cross the street because *it* was too wide.
-
-# %% [markdown]
-# <img src="img/garfield.jpg" style="float: right;width: 60%;"/>
-
-# %% [markdown]
-# <img src="img/garfield-yawn.png" style="float: right;width: 60%;"/>
+# ### Was kann man effizient lernen?
 #
-# - The cat didn't cross the street because *it* was too tired.
+# Sehr viel, wenn man sich geschickt anstellt
+# (und ein Problem hat, an dem viele andere Leute arbeiten)
 
 # %% [markdown]
-# - The cat didn't cross the street because *it* was too wet.
+# # Bias/Variance Tradeoff
 #
-# <img src="img/garfield-rain4.jpg" style="float: right;width: 60%;"/>
+# - Modelle mit geringer Expressivität (representational power)
+#   - Können schnell trainiert werden
+#   - Arbeiten mit wenig Trainingsdaten
+#   - Sind robust gegenüber Fehlern in den Trainingsdaten
+#
+# - Wir sind nicht an einer möglichst exakten Wiedergabe unserer Daten interessiert
+#
+# - Entscheidend ist wie gut unser Modell auf unbekannte Daten generalisiert
 
 # %% [markdown]
-# - The cat didn't cross the street because *it* was raining.
-#
-# <img src="img/garfield-rain2.gif" style="float: right;width: 60%;"/>
+# <img src="img/Figure-09-002.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# # The Bitter Lesson (Rich Sutton)
-#
-# [T]he only thing that matters in the long run is the leveraging of computation.
-#
-# Corollary: And data. Lots of data.
+# <img src="img/Figure-09-004.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
 
-# %%
+# %% [markdown]
+# <img src="img/Figure-09-003.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-09-005.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+#
+# ### Generalisierung und Rauschen
+# <img src="img/Figure-09-008.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-09-009.png" style="width: 80%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-09-010.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# ## Komplexität der Entscheidungsgrenze
+#
+# <img src="img/Figure-09-006.png" style="width: 100%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-09-001.png" style="width: 50%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# ## Datenverteilung und Qualität
+#
+
+# %% [markdown]
+# ### Erinnerung: die Trainings-Schleife
+#
+# <img src="img/Figure-08-001.png" style="width: 20%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-08-001.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# ## Was lernt ein Klassifizierer?
+#
+# <img src="img/Figure-08-002.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-08-003.png" style="width: 100%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# <img src="img/Figure-08-004.png" style="width: 70%; margin-left: auto; margin-right: auto;"/>
+
+# %% [markdown]
+# # Wie gut sind wir?
+#
+# Wie wissen wir, wie gut unser Modell wirklich ist?
+
+# %% [markdown]
+# ## Was kann schief gehen?
+#
+# <img src="img/Figure-03-015.png" style="width: 100%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# ## Was kann schief gehen?
+#
+# <img src="img/Figure-03-017.png" style="width: 100%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# ## Was kann schief gehen?
+#
+# <img src="img/Figure-03-018.png" style="width: 80%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# ## Accuracy: Wie viel haben wir richtig gemacht?
+#
+#
+# <img src="img/Figure-03-023.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# ## Precision: Wie gut sind unsere positiven Elemente?
+#
+#
+# <img src="img/Figure-03-024.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# ## Recall: Wie viele positive Elemente haben wir übersehen?
+#
+#
+# <img src="img/Figure-03-026.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>

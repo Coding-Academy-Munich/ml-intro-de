@@ -53,26 +53,30 @@ def plot_neuron_2d(neuron):
     plt.show()
 
 
-# %%
-def evaluate_model(model, test_dataset, batch_size=100):
-    test_loader = torch.utils.data.DataLoader(
-        dataset=test_dataset, batch_size=batch_size, shuffle=False
-    )
+def evaluate_model(model, x_test, y_test, batch_size=100):
+    y_pred = model.predict(x_test)
+    train_losses = model.history[:, "train_loss"]
+    validation_losses = model.history[:, "valid_loss"]
 
-    y_pred = model.predict(test_dataset)
-    y_true = torch.cat([y for _, y in test_loader], dim=0).numpy()
+    plt.figure(figsize=(6, 3))
+    plt.plot(range(len(train_losses)), train_losses, label="Train Loss")
+    plt.plot(range(len(validation_losses)), validation_losses, label="Validation Loss")
+    plt.title(f"Model: {type(model).__name__}")
+    plt.xlabel("Iterations")
+    plt.ylabel("Loss")
+    plt.show()
 
-    accuracy = accuracy_score(y_true, y_pred)
-    precision = precision_score(y_true, y_pred, average="weighted")
-    recall = recall_score(y_true, y_pred, average="weighted")
-    f1 = f1_score(y_true, y_pred, average="weighted")
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred, average="weighted")
+    recall = recall_score(y_test, y_pred, average="weighted")
+    f1 = f1_score(y_test, y_pred, average="weighted")
 
     print(f"Test Accuracy: {accuracy:.4f}")
     print(f"Test Precision: {precision:.4f}")
     print(f"Test Recall: {recall:.4f}")
     print(f"Test F1 Score: {f1:.4f}")
 
-    cm = confusion_matrix(y_true, y_pred)
+    cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(6, 4))
     sns.heatmap(cm, annot=True, fmt="d")
     plt.title("Confusion Matrix")
@@ -81,3 +85,12 @@ def evaluate_model(model, test_dataset, batch_size=100):
     plt.show()
 
     return accuracy, precision, recall, f1
+
+
+def plot_digits(X, y, n=5):
+    for i, (img, y) in enumerate(zip(X[:n].reshape(n, 28, 28), y[:n])):
+        plt.subplot(151 + i)
+        plt.imshow(img, cmap="gray_r")
+        plt.xticks([])
+        plt.yticks([])
+        plt.title(y)

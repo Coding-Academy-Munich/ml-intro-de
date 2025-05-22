@@ -10,138 +10,141 @@
 # %%
 import torch
 import torch.nn as nn
-
+import torchvision
+import torchvision.transforms as transforms
+import matplotlib.pyplot as plt
+from skorch import NeuralNetClassifier
+from llm_utils import evaluate_model, plot_digits
 
 # %% [markdown]
-# ## Modelle
+# ## Bessere Netzwerkarchitektur
 #
-# <img src="img/Figure-11-001.png" style="width: 100%;"/>
+# <img src="img/Figure-21-008.png" style="width: 30%; margin-left: auto; margin-right: auto; 0"/>
 
 # %% [markdown]
-# ## Für Neuronale Netze:
+# <img src="img/Figure-21-009.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# <img src="img/Figure-21-043.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
+
+# %% [markdown]
+# ## Beispiel: Conv Net
+# %%
+INPUT_SIZE = 28 * 28
+NUM_CLASSES = 10
+BATCH_SIZE = 100
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+# %%
+mnist_transforms = transforms.Compose(
+    [transforms.Resize((28, 28)), transforms.ToTensor()]
+)
+
+# %%
+train_dataset = torchvision.datasets.MNIST(
+    root="./localdata", train=True, transform=mnist_transforms, download=True
+)
+
+# %%
+test_dataset = torchvision.datasets.MNIST(
+    root="./localdata", train=False, transform=mnist_transforms, download=True
+)
+
+# %%
+X_train = train_dataset.data.reshape(-1, 1, 28, 28) / 255.0
+y_train = train_dataset.targets
+X_test = test_dataset.data.reshape(-1, 1, 28, 28) / 255.0
+y_test = test_dataset.targets
+
+# %%
+X_train.shape, y_train.shape, X_test.shape, y_test.shape
+
+
+# %%
+def create_conv_model():
+    return nn.Sequential(
+        nn.Conv2d(1, 32, kernel_size=3),
+        nn.ReLU(),
+        nn.Conv2d(32, 64, kernel_size=3),
+        nn.MaxPool2d(2),
+        nn.Dropout2d(0.5),
+        nn.Flatten(1),
+        nn.Linear(9216, 128),
+        nn.ReLU(),
+        nn.Dropout(0.5),
+        nn.Linear(128, 10),
+        nn.Softmax(dim=1),
+    )
+
+
+# %%
+cnn = NeuralNetClassifier(
+    create_conv_model,
+    max_epochs=10,
+    lr=0.002,
+    optimizer=torch.optim.Adam,
+    device=DEVICE,
+)
+
+# %%
+cnn.fit(X_train, y_train)
+
+# %%
+evaluate_model(cnn, X_test, y_test)
+
+# %%
+y_pred = cnn.predict(X_test)
+
+# %%
+error_mask = y_test.numpy() != y_pred
+
+# %%
+plot_digits(X_test[error_mask], y_pred[error_mask], 5)
+
+# %% [markdown]
 #
-# Was repräsentiert werden kann hängt ab von
+# ## Workshop: Fashion MNIST
 #
-# - Anzahl der Layers
-# - Anzahl der Neutronen per Layer
-# - Komplexität der Verbindungen zwischen Neutronen
-
-# %% [markdown]
-# ### Was kann man (theoretisch) lernen?
+# Trainieren Sie ein Convolutional Neural Network auf dem Fashion MNIST
+# Datensatz.
 #
-# Schwierig aber irrelevant
+# *Hinweis:* Die Daten für den Fashion MNIST Datensatz sind im `torchvision`
+# Paket enthalten. Sie können den Datensatz mit dem folgenden Code
+# herunterladen:
 
-# %% [markdown]
-# ### Was kann man praktisch lernen?
-#
-# Sehr viel, wenn man genug Zeit und Daten hat
+# %%
+fashion_train_dataset = torchvision.datasets.FashionMNIST(
+    root="./localdata",
+    train=True,
+    transform=mnist_transforms,
+    download=True,
+)
 
-# %% [markdown]
-# ### Was kann man effizient lernen?
-#
-# Sehr viel, wenn man sich geschickt anstellt
-# (und ein Problem hat, an dem viele andere Leute arbeiten)
+# %%
+fashion_test_dataset = torchvision.datasets.FashionMNIST(
+    root="./localdata",
+    train=False,
+    transform=mnist_transforms,
+    download=True,
+)
 
-# %% [markdown]
-# # Bias/Variance Tradeoff
-#
-# - Modelle mit geringer Expressivität (representational power)
-#   - Können schnell trainiert werden
-#   - Arbeiten mit wenig Trainingsdaten
-#   - Sind robust gegenüber Fehlern in den Trainingsdaten
-#
-# - Wir sind nicht an einer möglichst exakten Wiedergabe unserer Daten interessiert
-#
-# - Entscheidend ist wie gut unser Modell auf unbekannte Daten generalisiert
+# %%
+X_train_fashion = fashion_train_dataset.data.reshape(-1, 1, 28, 28) / 255.0
+y_train_fashion = fashion_train_dataset.targets
+X_test_fashion = fashion_test_dataset.data.reshape(-1, 1, 28, 28) / 255.0
+y_test_fashion = fashion_test_dataset.targets
 
-# %% [markdown]
-# <img src="img/Figure-09-002.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
+# %%
+fashion_cnn = NeuralNetClassifier(
+    create_conv_model,
+    max_epochs=10,
+    lr=0.002,
+    optimizer=torch.optim.Adam,
+    device=DEVICE,
+)
 
-# %% [markdown]
-# <img src="img/Figure-09-004.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
+# %%
+fashion_cnn.fit(X_train, y_train)
 
-# %% [markdown]
-# <img src="img/Figure-09-003.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-09-005.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-#
-# ### Generalisierung und Rauschen
-# <img src="img/Figure-09-008.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-09-009.png" style="width: 80%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-09-010.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# ## Komplexität der Entscheidungsgrenze
-#
-# <img src="img/Figure-09-006.png" style="width: 100%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-09-001.png" style="width: 50%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# ## Datenverteilung und Qualität
-#
-
-# %% [markdown]
-# ### Erinnerung: die Trainings-Schleife
-#
-# <img src="img/Figure-08-001.png" style="width: 20%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-08-001.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# ## Was lernt ein Klassifizierer?
-#
-# <img src="img/Figure-08-002.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-08-003.png" style="width: 100%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-08-004.png" style="width: 70%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# # Wie gut sind wir?
-#
-# Wie wissen wir, wie gut unser Modell wirklich ist?
-
-# %% [markdown]
-# ## Was kann schief gehen?
-#
-# <img src="img/Figure-03-015.png" style="width: 100%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# ## Was kann schief gehen?
-#
-# <img src="img/Figure-03-017.png" style="width: 100%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# ## Was kann schief gehen?
-#
-# <img src="img/Figure-03-018.png" style="width: 80%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# ## Accuracy: Wie viel haben wir richtig gemacht?
-#
-#
-# <img src="img/Figure-03-023.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# ## Precision: Wie gut sind unsere positiven Elemente?
-#
-#
-# <img src="img/Figure-03-024.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>
-
-# %% [markdown]
-# ## Recall: Wie viele positive Elemente haben wir übersehen?
-#
-#
-# <img src="img/Figure-03-026.png" style="width: 60%; margin-left: auto; margin-right: auto; 0"/>
+# %%
+evaluate_model(cnn, X_test, y_test)

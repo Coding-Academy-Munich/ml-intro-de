@@ -14,8 +14,6 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 import matplotlib.pyplot as plt
 from skorch import NeuralNetClassifier
-from skorch.callbacks import EpochScoring
-from skorch.dataset import Dataset
 from llm_utils import plot_neuron_2d, evaluate_model
 
 # %% [markdown]
@@ -116,9 +114,7 @@ plot_neuron_2d(SimpleNet())
 # %%
 INPUT_SIZE = 28 * 28
 NUM_CLASSES = 10
-NUM_EPOCHS = 5
 BATCH_SIZE = 100
-LEARNING_RATE = 0.005
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # %%
@@ -203,6 +199,15 @@ test_loader = torch.utils.data.DataLoader(
 )
 
 
+# %%
+import torch.nn.functional as F
+
+# %%
+LEARNING_RATE = 0.1
+DROPOUT = 0.5
+NUM_EPOCHS = 10
+
+
 # %% [markdown]
 #
 # ### Definieren des Modells
@@ -210,22 +215,24 @@ test_loader = torch.utils.data.DataLoader(
 # Wir definieren ein einfaches neuronales Netz mit einer einzigen versteckten
 # Schicht
 #
-# - `input_size` ist die Anzahl der Eingabewerte
 # - `hidden_size` ist die Anzahl der Neuronen in der versteckten Schicht
-# - `num_classes` ist die Anzahl der Ausgabewerte
+# - `dropout` ist die Dropout-Rate
 
 # %%
 class MnistModule(nn.Module):
-    def __init__(self, input_size, hidden_size, num_classes):
+    def __init__(self, hidden_size, dropout=DROPOUT):
         super().__init__()
-        self.model = nn.Sequential(
-            nn.Linear(input_size, hidden_size),
-            nn.ReLU(),
-            nn.Linear(hidden_size, num_classes),
-        )
+        self.dropout = dropout
+        self.hidden = nn.Linear(INPUT_SIZE, hidden_size)
+        self.out = nn.Linear(hidden_size, NUM_CLASSES)
 
     def forward(self, X, **kwargs):
-        return self.model(X.reshape(-1, INPUT_SIZE))
+        y = self.hidden(X)
+        y = F.relu(y)
+        y = F.dropout(y, p=self.dropout, training=self.training)
+        y = self.out(y)
+        y = F.softmax(y, dim=-1)
+        return y
 
 
 # %% [markdown]
@@ -237,37 +244,17 @@ class MnistModule(nn.Module):
 # - Mit `module___...` können wir die Parameter des Modells setzen
 # - `max_epochs` ist die Anzahl der Epochen
 # - `lr` ist die Lernrate
-# - `optimizer` ist der Optimierer
-# - `criterion` ist die Verlustfunktion
 # - `device` ist das Gerät, auf dem das Modell trainiert wird
-# - `iterator_train__shuffle=True` mischt die Daten
-# - `train_split=None` bedeutet, dass wir unser eigenes Validierungsset verwenden
-# - `callbacks` sind die Rückrufe, die während des Trainings aufgerufen werden
-# - `verbose=1` gibt den Fortschritt des Trainings aus
 
 # %%
-def create_skorch_model(hidden_size, epochs):
+def create_skorch_model(hidden_size, epochs=NUM_EPOCHS, dropout=DROPOUT):
     model = NeuralNetClassifier(
         MnistModule,
-        module__input_size=INPUT_SIZE,
         module__hidden_size=hidden_size,
-        module__num_classes=NUM_CLASSES,
+        module__dropout=dropout,
         max_epochs=epochs,
         lr=LEARNING_RATE,
-        optimizer=torch.optim.Adam,
-        criterion=nn.CrossEntropyLoss,
         device="cuda" if torch.cuda.is_available() else "cpu",
-        iterator_train__shuffle=True,
-        train_split=None,  # We'll use our own validation set
-        callbacks=[
-            EpochScoring(
-                scoring="accuracy",
-                lower_is_better=False,
-                name="val_acc",
-                on_train=False,
-            ),
-        ],
-        verbose=1,
     )
     return model
 
@@ -277,82 +264,48 @@ def create_skorch_model(hidden_size, epochs):
 # ### Training des Modells
 #
 # - Wir verwenden die `fit`-Methode von Skorch, um das Modell zu trainieren
-# - Wir geben dazu das Trainings- und Validierungsset an
-# - Da unser Modell ein eindimensionales Bild erwartet, müssen wir die Bilder
-#   umformen
-# - Wir verwenden `MnistDataset`, um das Dataset in ein Format zu bringen, das
-#   Skorch versteht
+# - Da Skorch an Scikit-Learn angelehnt ist, verwenden wir nicht die
+#   PyTorch Data Loader, sondern übergeben die Daten direkt als Tensoren
+# - Mit `fit` wird das Modell trainiert und die Trainings- und
+#   Validierungsverluste werden gespeichert
 
 # %%
-model = create_skorch_model(32, 3)
-
+model = create_skorch_model(64, dropout=0.25)
 
 # %%
-class MnistDataset(Dataset):
-    def __init__(self, data):
-        self.data = data
+X_train = train_dataset.data.reshape(-1, INPUT_SIZE) / 255.0
+y_train = train_dataset.targets
 
-    def __len__(self):
-        return len(self.data.dataset)
+# %%
+type(X_train), type(y_train), X_train.shape, y_train.shape
 
-    def __getitem__(self, i):
-        x, y = self.data.dataset[i]
-        return x.reshape(-1, INPUT_SIZE), y
+# %%
+X_test = test_dataset.data.reshape(-1, INPUT_SIZE) / 255.0
+y_test = test_dataset.targets
 
 
 # %%
-train_dataset = MnistDataset(train_loader)
-
-# %%
-test_dataset = MnistDataset(test_loader)
-
-# %%
-model.fit(train_dataset, y=None, X_valid=test_dataset, y_valid=None)
+model.fit(X_train, y_train)
 
 
 # %%
-def fit_model(hidden_size, num_epochs=NUM_EPOCHS, train_loader=train_loader):
-    model = create_skorch_model(hidden_size, num_epochs)
-
-    train_dataset = MnistDataset(train_loader)
-    test_dataset = MnistDataset(test_loader)
-
-    model.fit(train_dataset, y=None, X_valid=test_dataset, y_valid=None)
-
+def fit_and_evaluate_model(hidden_size, num_epochs=NUM_EPOCHS, dropout=DROPOUT, X_train=X_train, y_train=y_train):
+    model = create_skorch_model(hidden_size, num_epochs, dropout)
+    model.fit(X_train, y_train)
+    evaluate_model(model, X_test, y_test)
     return model
 
 
 # %%
-def fit_and_evaluate_model(
-    hidden_size, num_epochs=NUM_EPOCHS, train_loader=train_loader
-):
-    model = fit_model(hidden_size, num_epochs)
-    losses = model.history[:, "train_loss"]
-    test_dataset = MnistDataset(test_loader)
-
-    plt.figure(figsize=(6, 3))
-    plt.plot(range(len(losses)), losses)
-    plt.title(f"Hidden Size: {hidden_size}, Epochs: {num_epochs}")
-    plt.xlabel("Iterations")
-    plt.ylabel("Loss")
-    plt.show()
-
-    evaluate_model(model, test_dataset)
-
+fit_and_evaluate_model(32, 20, dropout=0.1)
 
 # %%
-fit_and_evaluate_model(32, 5)
+fit_and_evaluate_model(128, 40)
 
 # %%
-fit_and_evaluate_model(128, 8)
+fit_and_evaluate_model(1024, 400, dropout=0.0, X_train=X_train[:1000], y_train=y_train[:1000])
 
 # %%
-fit_and_evaluate_model(128, 8, augmented_train_loader)
-
-# %%
-fit_and_evaluate_model(512, 10)
-
-# %%
-fit_and_evaluate_model(512, 10, augmented_train_loader)
+fit_and_evaluate_model(512, 100)
 
 # %%
