@@ -143,3 +143,5 @@ class Neuron2D(nn.Module):
 
 # %%
 plot_neuron_2d(Neuron2D())
+
+# %%

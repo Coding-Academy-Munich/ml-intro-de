@@ -12,7 +12,6 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 import torch.nn as nn
-import matplotlib.pyplot as plt
 from skorch import NeuralNetClassifier
 from llm_utils import plot_neuron_2d, evaluate_model
 
@@ -203,7 +202,7 @@ test_loader = torch.utils.data.DataLoader(
 import torch.nn.functional as F
 
 # %%
-LEARNING_RATE = 0.1
+LEARNING_RATE = 0.2
 DROPOUT = 0.5
 NUM_EPOCHS = 10
 
@@ -241,13 +240,14 @@ class MnistModule(nn.Module):
 #
 # Wir definieren ein Skorch-Modell, das die oben definierte Klasse verwendet
 # - `NeuralNetClassifier` ist das Torch-Modell
-# - Mit `module___...` können wir die Parameter des Modells setzen
+# - Mit `module__...` können wir die Parameter des Modells setzen
 # - `max_epochs` ist die Anzahl der Epochen
 # - `lr` ist die Lernrate
 # - `device` ist das Gerät, auf dem das Modell trainiert wird
 
 # %%
-def create_skorch_model(hidden_size, epochs=NUM_EPOCHS, dropout=DROPOUT):
+def create_skorch_model(hidden_size, epochs=NUM_EPOCHS, dropout=DROPOUT, seed=2025):
+    torch.manual_seed(seed)
     model = NeuralNetClassifier(
         MnistModule,
         module__hidden_size=hidden_size,
@@ -265,12 +265,12 @@ def create_skorch_model(hidden_size, epochs=NUM_EPOCHS, dropout=DROPOUT):
 #
 # - Wir verwenden die `fit`-Methode von Skorch, um das Modell zu trainieren
 # - Da Skorch an Scikit-Learn angelehnt ist, verwenden wir nicht die
-#   PyTorch Data Loader, sondern übergeben die Daten direkt als Tensoren
+#   PyTorch Data Loader, sondern übergeben das Dataset direkt
 # - Mit `fit` wird das Modell trainiert und die Trainings- und
 #   Validierungsverluste werden gespeichert
 
 # %%
-model = create_skorch_model(64, dropout=0.25)
+model = create_skorch_model(32, epochs=8, dropout=0.0)
 
 # %%
 X_train = train_dataset.data.reshape(-1, INPUT_SIZE) / 255.0
@@ -283,29 +283,63 @@ type(X_train), type(y_train), X_train.shape, y_train.shape
 X_test = test_dataset.data.reshape(-1, INPUT_SIZE) / 255.0
 y_test = test_dataset.targets
 
-
 # %%
 model.fit(X_train, y_train)
 
+# %%
+model.predict(X_test[30:40])
 
 # %%
-def fit_and_evaluate_model(hidden_size, num_epochs=NUM_EPOCHS, dropout=DROPOUT, X_train=X_train, y_train=y_train):
-    model = create_skorch_model(hidden_size, num_epochs, dropout)
-    model.fit(X_train, y_train)
-    evaluate_model(model, X_test, y_test)
-    return model
+y_test[30:40].numpy()
+
+# %% [markdown]
+#
+# Berechnen der Indizes der falsch klassifizierten Samples
+
+# %%
+torch.where(torch.tensor(model.predict(X_test)) != y_test)[0][:10]
 
 
 # %%
-fit_and_evaluate_model(32, 20, dropout=0.1)
+model = create_skorch_model(32, 20, dropout=0.0)
+model.fit(X_train, y_train)
 
 # %%
-fit_and_evaluate_model(128, 40)
+evaluate_model(model, X_test, y_test)
 
 # %%
-fit_and_evaluate_model(1024, 400, dropout=0.0, X_train=X_train[:1000], y_train=y_train[:1000])
+model = create_skorch_model(32, 20, dropout=0.5)
+model.fit(X_train, y_train)
 
 # %%
-fit_and_evaluate_model(512, 100)
+evaluate_model(model, X_test, y_test)
+
+# %%
+model = create_skorch_model(32, 20, dropout=0.1)
+model.fit(X_train, y_train)
+
+# %%
+evaluate_model(model, X_test, y_test)
+
+# %%
+model = create_skorch_model(1024, 200, dropout=0.0)
+model.fit(X_train[:1000], y_train[:1000])
+
+# %%
+evaluate_model(model, X_test, y_test)
+
+# %%
+model = create_skorch_model(128, 35, dropout=0.5)
+model.fit(X_train, y_train)
+
+# %%
+evaluate_model(model, X_test, y_test)
+
+# %%
+model = create_skorch_model(512, 40, dropout=0.75)
+model.fit(X_train, y_train)
+
+# %%
+evaluate_model(model, X_test, y_test)
 
 # %%
