@@ -12,13 +12,14 @@ import torch
 import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
-import matplotlib.pyplot as plt
 from skorch import NeuralNetClassifier
 from llm_utils import evaluate_model, plot_digits
 
 # %% [markdown]
-# ## Bessere Netzwerkarchitektur
 #
+# ## Bessere Netzwerkarchitektur
+
+# %% [markdown]
 # <img src="img/Figure-21-008.png" style="width: 30%; margin-left: auto; margin-right: auto; 0"/>
 
 # %% [markdown]
@@ -28,7 +29,15 @@ from llm_utils import evaluate_model, plot_digits
 # <img src="img/Figure-21-043.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
 
 # %% [markdown]
+#
 # ## Beispiel: Conv Net
+
+# %% [markdown]
+#
+# ## Example: Conv Net
+#
+
+
 # %%
 INPUT_SIZE = 28 * 28
 NUM_CLASSES = 10
