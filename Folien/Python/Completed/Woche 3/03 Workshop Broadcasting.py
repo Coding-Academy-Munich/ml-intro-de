@@ -1,4 +1,3 @@
-# %%
 # %% [markdown]
 #
 # <div style="text-align:center; font-size:200%;">
@@ -32,12 +31,33 @@ lst1 = [2, 3, 5, 7]
 # Berechnen Sie Arrays `arr2` und `arr3`, die die Elemente von `arr1` bzw.
 # `lst1` quadriert enthalten.
 
+# %%
+arr2 = np.square(arr1)
+arr2
+
+# %%
+arr3 = np.square(lst1)
+arr3
+
 # %% [markdown]
 #
 # Berechnen Sie das Produkt von `arr1` und `lst1`. Bevor Sie Ihre Lösung
 # auswerten: Versuchen Sie, die Form des Ergebnisses zu bestimmen. Wie wird die
 # Form des Ergebnisses bestimmt? Benötigen Sie eine universelle Funktion oder
 # können Sie die Multiplikation einfach als normales Produkt durchführen?
+
+# %%
+arr1.shape
+
+# %%
+np.shape(lst1)
+
+# %%
+arr4 = arr1 * lst1
+arr4
+
+# %%
+np.multiply(arr1, lst1)
 
 # %% [markdown]
 #
@@ -51,6 +71,35 @@ lst1 = [2, 3, 5, 7]
 # Array zurück, das `['no', 'maybe', 'yes', 'yes', 'maybe', 'no', 'maybe']`
 # enthält.
 
+# %%
+ages = [15, 20, 30, 21, 20, 17, 18, 21]
+
+# %%
+np.digitize(ages, [0, 18, 21])
+
+
+# %%
+def may_consume_alcohol(ages):
+    return np.choose(
+        np.digitize(ages, [0, 18, 21]) - 1,
+        ["no", "maybe", "yes"],
+    )
+
+
+# %%
+may_consume_alcohol(ages)
+
+# %%
+may_consume_alcohol(ages) == np.array(
+    ["no", "maybe", "yes", "yes", "maybe", "no", "maybe", "yes"]
+)
+
+# %%
+assert all(
+    may_consume_alcohol(ages)
+    == np.array(["no", "maybe", "yes", "yes", "maybe", "no", "maybe", "yes"])
+)
+
 # %% [markdown]
 #
 # Schreiben Sie eine Funktion `double_or_half(values)`, die eine Liste oder ein
@@ -62,3 +111,24 @@ lst1 = [2, 3, 5, 7]
 # zurückgeben, das die Werte `[0, 2, 1, 10, 5, 198]` enthält.
 #
 # *Hinweis:* Schauen Sie in die Dokumentation für die Funktion `choose`.
+
+# %%
+values = [0, 1, 2, 5, 10, 99]
+
+# %%
+np.divmod(values, 2)
+
+
+# %%
+def double_or_half(values):
+    divs, mods = np.divmod(values, 2)
+    return np.choose(mods, [divs, np.multiply(values, 2)])
+
+
+# %%
+double_or_half(values)
+
+# %%
+assert all(double_or_half(values) == np.array([0, 2, 1, 10, 5, 198]))
+
+# %%
