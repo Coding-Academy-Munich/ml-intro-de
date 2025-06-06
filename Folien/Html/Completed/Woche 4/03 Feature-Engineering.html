@@ -13200,13 +13200,13 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=b90850263213d3db">
+<div class="cell border-box-sizing code_cell rendered celltag_keep" id="cell-id=7609881145366c94">
 <div class="input">
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -13245,14 +13245,14 @@ ZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIi8+PC9zdmc+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=c9f0cb510c2e54b5">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide celltag_keep" id="cell-id=d59381d661f97646">
 <div class="input">
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">y_lin_train</span> <span class="o">=</span> <span class="n">lin</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y_lin_test</span> <span class="o">=</span> <span class="n">lin</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y_fun_train</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">y_fun_train</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y_fun_test</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -13711,7 +13711,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=84ada9ce4253f762">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=84ada9ce4253f762">
 <div class="input">
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
@@ -13792,19 +13792,26 @@ Lots of randomness: MAE = 2.31, MSE = 7.57, RMSE = 2.75
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=d74ac0c67de572b8"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=7d4dbbd40be20ed4"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Feature-Augmentation">Feature-Augmentation<a class="anchor-link" href="#Feature-Augmentation">¶</a></h3><ul>
 <li>Idee: Wir geben dem linearen Regressor mehr Features, die nicht-linear sind.</li>
-<li>Idealerweise die Funktionen von <code>x</code>, die in der Funktion <code>f_y</code> vorkommen.</li>
+<li>Idealerweise die Funktionen von $x$, die in der Funktion $f$ vorkommen.</li>
 <li>$\mathit{lin}(x) = 0.85 \cdot x - 1.5$</li>
-<li>$\mathit{fun}(x) = 0.1 \cdot x^2 - 2 + 2 \cdot \sin(x)$</li>
+<li>$\mathit{fun}(x) = 0.1 \cdot x^2+ 2 \cdot \sin(x) - 2$</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=4deb7dbdd57fc115">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=accb4e69dfd7acfd"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$\mathit{fun}(x) = 0.1 \cdot x^2+ 2 \cdot \sin(x) - 2$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4deb7dbdd57fc115">
 <div class="input">
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
@@ -13828,17 +13835,7 @@ Lots of randomness: MAE = 2.31, MSE = 7.57, RMSE = 2.75
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=d8a4cbf0e744dd6b"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Trainieren eines linearen Regressors mit augmentierten Features</li>
-<li>Lineare Funktion (mit Rauschen) als Zielvariable</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=85b07a21b9738077">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=85b07a21b9738077">
 <div class="input">
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
@@ -13846,6 +13843,16 @@ Lots of randomness: MAE = 2.31, MSE = 7.57, RMSE = 2.75
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">x_test_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x_test</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">*</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_test</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=d8a4cbf0e744dd6b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Trainieren eines linearen Regressors mit augmentierten Features</li>
+<li>Lineare Funktion (mit Rauschen) als Zielvariable</li>
+</ul>
 </div>
 </div>
 </div>
@@ -14335,7 +14342,7 @@ Lots of randomness: MAE = 1.23, MSE = 2.38, RMSE = 1.54
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=f236d95544231f00"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=c6ba8c08bdd746e4"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>$\mathit{lin}(x) = 0.85 \cdot x - 1.5$</p>
@@ -14450,10 +14457,10 @@ Lots of randomness: MAE = 1.46, MSE = 3.13, RMSE = 1.77
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=32dec1b99270e0bf"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_subslide" id="cell-id=6f833d74127aec74"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>$\mathit{fun}(x) = 0.1 \cdot x^2 - 2 + 2 \cdot \sin(x)$</p>
+<p>$\mathit{fun}(x) = 0.1 \cdot x^2+ 2 \cdot \sin(x) - 2$</p>
 </div>
 </div>
 </div>
@@ -14472,8 +14479,8 @@ Lots of randomness: MAE = 1.46, MSE = 3.13, RMSE = 1.77
 <div class="output_area">
 <div class="prompt output_prompt">Out[21]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(array([-5.40506064e-16,  1.00000000e-01,  2.00000000e+00]),
- np.float64(-1.9999999999999976))</pre>
+<pre>(array([1.08440088e-16, 1.00000000e-01, 2.00000000e+00]),
+ np.float64(-1.999999999999999))</pre>
 </div>
 </div>
 </div>
@@ -14517,7 +14524,7 @@ Lots of randomness: MAE = 1.46, MSE = 3.13, RMSE = 1.77
 <div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(array([-0.40710023,  0.13636511,  2.18378126]),
- np.float64(-1.0445577265801165))</pre>
+ np.float64(-1.0445577265801183))</pre>
 </div>
 </div>
 </div>
@@ -14576,7 +14583,7 @@ Parameters: [ 0.90746461 -0.00832661  0.02177509], -1.559464808872633
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Vs. input: MAE: 0.00, MSE: 0.00, RMSE: 0.00
 True:      MAE: 0.00, MSE: 0.00, RMSE: 0.00
-Parameters: [-5.40506064e-16  1.00000000e-01  2.00000000e+00], -1.9999999999999976
+Parameters: [1.08440088e-16 1.00000000e-01 2.00000000e+00], -1.999999999999999
 </pre>
 </div>
 </div>
@@ -14606,7 +14613,7 @@ Parameters: [-5.40506064e-16  1.00000000e-01  2.00000000e+00], -1.99999999999999
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Vs. input: MAE: 0.45, MSE: 0.45, RMSE: 0.67
 True:      MAE: 0.13, MSE: 0.13, RMSE: 0.36
-Parameters: [-0.09498741  0.11019365  2.00012438], -1.9780018411812426
+Parameters: [-0.09498741  0.11019365  2.00012438], -1.9780018411812406
 </pre>
 </div>
 </div>
@@ -14666,7 +14673,7 @@ Parameters: [-0.12416152  0.10602743  1.9614046 ], -1.8020034486747645
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Vs. input: MAE: 2.91, MSE: 2.91, RMSE: 1.71
 True:      MAE: 0.44, MSE: 0.44, RMSE: 0.66
-Parameters: [0.42777551 0.04847946 1.8754744 ], -2.8474408711203743
+Parameters: [0.42777551 0.04847946 1.8754744 ], -2.847440871120374
 </pre>
 </div>
 </div>
@@ -14757,7 +14764,7 @@ Parameters: [-0.23931858  0.14364196  0.9223355 ], -2.077344707371995
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=941e9dbbec691475">
+<div class="cell border-box-sizing code_cell rendered celltag_subslide" id="cell-id=941e9dbbec691475">
 <div class="input">
 <div class="prompt input_prompt">In [33]:</div>
 <div class="inner_cell">

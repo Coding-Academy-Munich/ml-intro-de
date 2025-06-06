@@ -32,7 +32,7 @@ def lin(x):
 
 # %%
 def fun(x):
-    return 0.1 * x**2 - 2 + 2 * np.sin(x)
+    return 0.1 * x**2 + 2 * np.sin(x) - 2
 
 
 # %% [markdown]
@@ -48,7 +48,7 @@ x_train[:3]
 # %%
 y_lin_train = lin(x_train).reshape(-1)
 y_lin_test = lin(x_test).reshape(-1)
-y_fun_train = fun(x_train.reshape(-1))
+y_fun_train = fun(x_train).reshape(-1)
 y_fun_test = fun(x_test).reshape(-1)
 
 # %% [markdown]
@@ -77,22 +77,26 @@ et.evaluate_regressor(LinearRegression, fun, x_train, x_test)
 # ### Feature-Augmentation
 #
 # - Idee: Wir geben dem linearen Regressor mehr Features, die nicht-linear sind.
-# - Idealerweise die Funktionen von `x`, die in der Funktion `f_y` vorkommen.
+# - Idealerweise die Funktionen von $x$, die in der Funktion $f$ vorkommen.
 # - $\mathit{lin}(x) = 0.85 \cdot x - 1.5$
-# - $\mathit{fun}(x) = 0.1 \cdot x^2 - 2 + 2 \cdot \sin(x)$
+# - $\mathit{fun}(x) = 0.1 \cdot x^2+ 2 \cdot \sin(x) - 2$
+
+# %% [markdown]
+#
+# $\mathit{fun}(x) = 0.1 \cdot x^2+ 2 \cdot \sin(x) - 2$
 
 # %%
 x_train_aug = np.concatenate([x_train, x_train * x_train, np.sin(x_train)], axis=1)
 x_train_aug[:3]
+
+# %%
+x_test_aug = np.concatenate([x_test, x_test * x_test, np.sin(x_test)], axis=1)
 
 # %% [markdown]
 #
 # - Trainieren eines linearen Regressors mit augmentierten Features
 # - Lineare Funktion (mit Rauschen) als Zielvariable
 
-
-# %%
-x_test_aug = np.concatenate([x_test, x_test * x_test, np.sin(x_test)], axis=1)
 
 # %%
 lr_aug_lin = LinearRegression()
@@ -132,7 +136,7 @@ fun_reg, fun_reg_rand, fun_reg_chaos = et.evaluate_regressor(
 )
 
 # %% [markdown]
-# $\mathit{fun}(x) = 0.1 \cdot x^2 - 2 + 2 \cdot \sin(x)$
+# $\mathit{fun}(x) = 0.1 \cdot x^2+ 2 \cdot \sin(x) - 2$
 
 # %%
 fun_reg.coef_, fun_reg.intercept_
