@@ -20,23 +20,17 @@ from llm_utils import evaluate_model, plot_digits
 # ## Bessere Netzwerkarchitektur
 
 # %% [markdown]
-# <img src="img/Figure-21-008.png" style="width: 30%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-21-008.png" style="width: 30%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# <img src="img/Figure-21-009.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-21-009.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
-# <img src="img/Figure-21-043.png" style="width: 40%; margin-left: auto; margin-right: auto; 0"/>
+# <img src="img/Figure-21-043.png" style="width: 40%; margin-left: auto; margin-right: auto;"/>
 
 # %% [markdown]
 #
 # ## Beispiel: Conv Net
-
-# %% [markdown]
-#
-# ## Example: Conv Net
-#
-
 
 # %%
 INPUT_SIZE = 28 * 28
@@ -68,6 +62,9 @@ y_test = test_dataset.targets
 # %%
 X_train.shape, y_train.shape, X_test.shape, y_test.shape
 
+# %% [markdown]
+#
+# ### Definieren des Modells
 
 # %%
 def create_conv_model():
@@ -86,6 +83,10 @@ def create_conv_model():
     )
 
 
+# %% [markdown]
+#
+# ### Erzeugen des Skorch-Classifiers
+
 # %%
 cnn = NeuralNetClassifier(
     create_conv_model,
@@ -95,11 +96,24 @@ cnn = NeuralNetClassifier(
     device=DEVICE,
 )
 
+
+# %% [markdown]
+#
+# ### Trainieren des Modells
+
 # %%
 cnn.fit(X_train, y_train)
 
+# %% [markdown]
+#
+# ### Evaluieren des Modells
+
 # %%
 evaluate_model(cnn, X_test, y_test)
+
+# %% [markdown]
+#
+# ### Analysieren der Fehler
 
 # %%
 y_pred = cnn.predict(X_test)
