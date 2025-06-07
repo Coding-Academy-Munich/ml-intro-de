@@ -89,7 +89,7 @@ def evaluate_model(model, x_test, y_test, batch_size=100):
 
 def plot_digits(X, y, n=5):
     for i, (img, y) in enumerate(zip(X[:n].reshape(n, 28, 28), y[:n])):
-        plt.subplot(151 + i)
+        plt.subplot(1, n, i)
         plt.imshow(img, cmap="gray_r")
         plt.xticks([])
         plt.yticks([])

@@ -90,14 +90,6 @@ import torch.nn as nn
 #
 
 # %% [markdown]
-# ### Erinnerung: die Trainings-Schleife
-#
-# <img src="img/Figure-08-001.png" style="width: 20%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
-# <img src="img/Figure-08-001.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
-
-# %% [markdown]
 # ## Was lernt ein Klassifizierer?
 #
 # <img src="img/Figure-08-002.png" style="width: 60%; margin-left: auto; margin-right: auto;"/>
