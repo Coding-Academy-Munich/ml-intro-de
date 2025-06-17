@@ -128,8 +128,8 @@ transform = transforms.Compose([
     transforms.Pad(2),  # Pad to make 32x32
     transforms.Lambda(lambda x: x.repeat(3, 1, 1))  # Convert to 3 channels
 ])
-train_dataset = torchvision.datasets.MNIST(root='data', train=True, transform=transform, download=True)
-test_dataset = torchvision.datasets.MNIST(root='data', train=False, transform=transform, download=True)
+train_dataset = torchvision.datasets.MNIST(root='localdata', train=True, transform=transform, download=True)
+test_dataset = torchvision.datasets.MNIST(root='localdata', train=False, transform=transform, download=True)
 
 # %%
 # Define the dataloaders
@@ -149,6 +149,19 @@ num_trainable_params = sum(p.numel() for p in model.parameters() if p.requires_g
 num_fixed_params = sum(p.numel() for p in model.parameters() if not p.requires_grad)
 print(f'Number of trainable parameters: {num_trainable_params}')
 print(f'Number of fixed parameters: {num_fixed_params}')
+
+# %%
+# Freeze the first few layers (optional)
+for name, param in model.named_parameters():
+    if name[:3] != 'fc.':  # Freeze all layers except the final fully connected layer
+        param.requires_grad = False
+
+# %%
+num_trainable_params_2 = sum(p.numel() for p in model.parameters() if p.requires_grad)
+num_fixed_params_2 = sum(p.numel() for p in model.parameters() if not p.requires_grad)
+print(f'Number of trainable parameters: {num_trainable_params_2}')
+print(f'Number of fixed parameters: {num_fixed_params_2}')
+
 
 # %%
 # Define the loss function and optimizer
@@ -262,7 +275,7 @@ print(classification_report(y_true, y_pred))
 
 # %%
 # Visualize some test images with predictions
-images = np.array(test_dataset.data)[:6]
+images = test_dataset.data.numpy()[:6]
 labels = np.array(y_true)[:6]
 preds = np.array(y_pred)[:6]
 
@@ -274,7 +287,7 @@ for idx in np.arange(len(images)):
     ax = fig.add_subplot(2, 3, idx+1)
     img = images[idx]
     ax.imshow(img, cmap="binary")
-    ax.set_title(f'Predicted: {predicted[idx]}, Actual: {labels[idx]}')
+    ax.set_title(f'Predicted: {y_pred[idx]}, Actual: {y_true[idx]}')
     ax.axis('off')
 
 plt.show()
@@ -286,10 +299,14 @@ misclassified_images = np.array(test_dataset.data)[misclassified]
 misclassified_labels = np.array(y_true)[misclassified]
 misclassified_preds = np.array(y_pred)[misclassified]
 
+# %%
+len(misclassified), len(y_pred)
+
+# %%
 fig = plt.figure(figsize=(12, 12))
 
-for i in range(12):
-    ax = fig.add_subplot(4, 3, i+1)
+for i in range(20):
+    ax = fig.add_subplot(5, 4, i+1)
     img = misclassified_images[i]
     ax.imshow(img, cmap='binary')
     ax.set_title(f'Predicted: {misclassified_preds[i]}, Actual: {misclassified_labels[i]}')

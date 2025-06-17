@@ -7,11 +7,6 @@
 # <div style="text-align:center;">Dr. Matthias Hölzl</div>
 # <br/>
 
-# %%
-import torch
-import torch.nn as nn
-
-
 # %% [markdown]
 # ## Modelle
 #

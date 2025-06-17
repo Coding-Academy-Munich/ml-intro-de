@@ -13,6 +13,7 @@ import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
 from skorch import NeuralNetClassifier
+from skorch.callbacks import LRScheduler
 from llm_utils import evaluate_model, plot_digits
 
 # %% [markdown]
@@ -61,6 +62,7 @@ y_test = test_dataset.targets
 
 # %%
 X_train.shape, y_train.shape, X_test.shape, y_test.shape
+
 
 # %% [markdown]
 #
@@ -167,7 +169,75 @@ fashion_cnn = NeuralNetClassifier(
 )
 
 # %%
-fashion_cnn.fit(X_train, y_train)
+fashion_cnn.fit(X_train_fashion, y_train_fashion)
 
 # %%
-evaluate_model(cnn, X_test, y_test)
+y_pred_fashion = fashion_cnn.predict(X_test_fashion)
+
+# %%
+plot_digits(X_test_fashion, y_pred_fashion, 5)
+
+# %%
+error_mask_fashion = y_test_fashion.numpy() != y_pred_fashion
+
+# %%
+evaluate_model(fashion_cnn, X_test_fashion, y_test_fashion)
+
+
+# %%
+def create_fashion_conv_model():
+    return nn.Sequential(
+        # Image size: 28x28x1
+        nn.Conv2d(1, 32, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(32),
+        nn.Dropout2d(0.6),
+        # Input size: 28x28x32
+        nn.Conv2d(32, 32, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(32),
+        nn.Dropout2d(0.6),
+        # Input size: 28x28x32
+        nn.Conv2d(32, 64, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(64),
+        nn.Dropout2d(0.6),
+        # Input size: 28x28x64
+        nn.Conv2d(64, 128, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(128),
+        nn.Dropout2d(0.6),
+        # Input size: 28x28x128
+        nn.MaxPool2d(2),
+        # Input size: 14x14x128
+        nn.Flatten(1),
+        nn.Linear(14 * 14 * 128, 1024),
+        nn.ReLU(),
+        nn.BatchNorm1d(1024),
+        nn.Dropout(0.6),
+        nn.Linear(1024, 10),
+        nn.Softmax(dim=1),
+    )
+
+
+# %%
+fashion_cnn_2 = NeuralNetClassifier(
+    create_fashion_conv_model,
+    max_epochs=40,
+    lr=0.0025,
+    optimizer=torch.optim.Adam,
+    device=DEVICE,
+    callbacks=[
+        (
+            "lr_scheduler",
+            # LRScheduler(policy="StepLR", step_size=12, gamma=0.5)
+            LRScheduler(policy="ExponentialLR", gamma=0.95)
+        ),
+    ],
+)
+
+# %%
+fashion_cnn_2.fit(X_train_fashion, y_train_fashion)
+
+# %%
+evaluate_model(fashion_cnn_2, X_test_fashion, y_test_fashion)

@@ -26,19 +26,19 @@ def plot_neuron_2d(neuron):
 
     # Create the 3D plot
     fig = plt.figure(figsize=(6, 6))
-    ax = fig.add_subplot(111, projection='3d')
+    ax = fig.add_subplot(111, projection="3d")
 
     # Plot the surface
-    ax.plot_surface(X, Y, Z, cmap='viridis')
+    ax.plot_surface(X, Y, Z, cmap="viridis")
 
     # Add a color bar
     # fig.colorbar(surf, shrink=0.5, aspect=5)
 
     # Set labels and title
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Activation')
-    ax.set_title('2D Neuron Activation')
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_zlabel("Activation")
+    ax.set_title("2D Neuron Activation")
 
     # Enable rotation
     ax.mouse_init()
@@ -89,7 +89,7 @@ def evaluate_model(model, x_test, y_test, batch_size=100):
 
 def plot_digits(X, y, n=5):
     for i, (img, y) in enumerate(zip(X[:n].reshape(n, 28, 28), y[:n])):
-        plt.subplot(1, n, i)
+        plt.subplot(1, n, i + 1)
         plt.imshow(img, cmap="gray_r")
         plt.xticks([])
         plt.yticks([])
